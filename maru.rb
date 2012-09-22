@@ -7,6 +7,7 @@ require 'enumerator' # each_consを利用するため必要
 
 # 変更しました
 # 俺も変更した
+#さらに編集します
 # ヘッドラインの1行目の記事を取得する
 url = 'http://www.asahi.com/'
 text = String.new
