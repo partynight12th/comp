@@ -6,6 +6,7 @@ require 'open-uri'
 require 'enumerator' # each_consを利用するため必要
 
 # 変更しました
+# 俺も変更した
 # ヘッドラインの1行目の記事を取得する
 url = 'http://www.asahi.com/'
 text = String.new
