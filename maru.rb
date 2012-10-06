@@ -1,13 +1,11 @@
 #!/usr/bin/ruby
+# encoding: utf-8
 require 'MeCab'
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'enumerator' # each_consを利用するため必要
 
-# 変更しました。
-# 俺も変更した
-#さらに編集します
 # ヘッドラインの1行目の記事を取得する
 url = 'http://www.asahi.com/'
 text = String.new
@@ -32,16 +30,17 @@ t2 = data[0]['middle']
 new_text = t1 + t2  
 while true
   _a = Array.new
-  data.each do |hash|
-    _a.push hash if hash['head'] == t1 && hash['middle'] == t2
+  data.each_with_index do |hash, i|
+    _a.push i if hash['head'] == t1 && hash['middle'] == t2
   end 
  
   break if _a.size == 0
-  num = rand(_a.size) # 乱数で次の文節を決定する
-  new_text = new_text + _a[num]['end']
-  break if _a[num]['end'] == "EOS"
-  t1 = _a[num]['middle']
-  t2 = _a[num]['end']
+  num = _a[rand(_a.size)] # 乱数で次の文節を決定する
+  new_text = new_text + data[num]['end']
+  break if data[num]['end'] == "EOS"
+  t1 = data[num]['middle']
+  t2 = data[num]['end']
+  data.delete_at(num);
 end
 
 # EOSを削除して、結果出力
