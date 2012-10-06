@@ -19,7 +19,7 @@ text = String.new
 nokogiri = Nokogiri::HTML.parse(open(url))
 li = nokogiri.xpath('//div[@id="HeadLine"]/div[@class="Guest"]/dl[@class="FstTitle"]/dt/a')
 nokogiri = Nokogiri::HTML.parse(open(url + li[0].attribute('href')))
-nokogiri.xpath('//div[@class="BodyTxt"]/*').each do |body|
+nokogiri.xpath('//div[@class="BodyTxt"]/p').each do |body|
   text = text +  body.text
 end
 text.gsub!(/\n/,'')
