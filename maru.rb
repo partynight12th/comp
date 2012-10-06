@@ -5,6 +5,13 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'enumerator' # each_consを利用するため必要
+require 'nkf'
+
+
+def zennum2hannum(str)
+	return NKF.nkf( '-Wwm0Z0', str);
+end
+
 
 # ヘッドラインの1行目の記事を取得する
 url = 'http://www.asahi.com/'
@@ -16,6 +23,7 @@ nokogiri.xpath('//div[@class="BodyTxt"]/*').each do |body|
   text = text +  body.text
 end
 text.gsub!(/\n/,'')
+text = zennum2hannum(text);
 
 # mecabで形態素解析して、 参照テーブルを作る
 mecab = MeCab::Tagger.new("-Owakati")
