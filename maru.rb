@@ -1,16 +1,12 @@
 #!/usr/bin/ruby
 # encoding: utf-8
+$LOAD_PATH.push('.') #require対象ディレクトリにカレントを追加
 require 'MeCab'
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'enumerator' # each_consを利用するため必要
-require 'nkf'
-
-
-def zennum2hannum(str)
-	return NKF.nkf( '-Wwm0Z0', str);
-end
+require 'Summarizer'
 
 
 # ヘッドラインの1行目の記事を取得する
@@ -23,7 +19,11 @@ nokogiri.xpath('//div[@class="BodyTxt"]/p').each do |body|
   text = text +  body.text
 end
 text.gsub!(/\n/,'')
-text = zennum2hannum(text);
+
+puts Summarizer::summarize(text)
+
+=begin
+text = zennum2hannum(text)
 
 # mecabで形態素解析して、 参照テーブルを作る
 mecab = MeCab::Tagger.new("-Owakati")
@@ -53,3 +53,4 @@ end
 
 # EOSを削除して、結果出力
 puts new_text.gsub!(/EOS$/,'')
+=end
