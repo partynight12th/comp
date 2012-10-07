@@ -1,0 +1,14 @@
+#Required
+* ruby (&gt;=1.9.3)
+* Nokogiri (&gt;=1.5.5)
+* MeCab (&gt;=0.994)
+* Twitter (&gt;=4.0.0)
+
+#Usage
+## asashi.com
+$ ruby maru.rb
+
+## twitter search
+$ ruby summaryTweet.rb "&lt;searchtext&gt;"
+
+
