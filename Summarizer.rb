@@ -1,3 +1,5 @@
+require 'MeCab'
+require 'enumerator' # each_consを利用するため必要
 require 'nkf'
 
 module Summarizer
